@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check the forecast!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="total">
+      <div class="new-city">
+        <form placeholder="ENTER CITY..." id="enter-city-form">
+          <input
+            class="enter-city"
+            type="text"
+            id="enter-city"
+            autocomplete="off"
+            placeholder="ENTER CITY..."
+            required
+          />
+          <input
+            type="submit"
+            value="arrow_forward"
+            class="search material-symbols-outlined icon-arrow"
+          />
+        </form>
+      </div>
+      <div class="current">
+        <span id="current-city">COPENHAGEN</span>
+        <div class="today temperature">
+          TEMPERATURE
+          <div class="value-temperature">
+            <a href="" id="current-temp" class="current-temp"
+              ><span id="current-temp-value">6</span>°<span
+                id="current-temp-unit"
+                >C</span
+              ></a
+            >
+          </div>
+        </div>
+        <div class="today wind">
+          WIND
+          <div class="value-wind"><span id="wind-speed">10</span>m/s</div>
+        </div>
+        <div class="today humidity">
+          HUMIDITY
+          <div class="value-humidity"><span id="humidity">78</span>%</div>
+        </div>
+        <div class="today climate">
+          <img src="img/cloud.png" alt="cloud" height="58px" />
+        </div>
+        <div class="today time">
+          <div id="current-day">SUNDAY</div>
+          <div class="value-time" id="current-time">23:59</div>
+        </div>
+      </div>
+
+      <ul>
+        <li class="day one">
+          MONDAY
+          <div class="temperature-one">13°C</div>
+        </li>
+        <li class="day two">
+          TUESDAY
+          <div class="temperature-two">16°C</div>
+        </li>
+        <li class="day three">
+          WEDNESDAY
+          <div class="temperature-three">10°C</div>
+        </li>
+        <li class="day four">
+          THURSDAY
+          <div class="temperature-four">3°C</div>
+        </li>
+        <li class="day five">
+          FRIDAY
+          <div class="temperature-five">0°C</div>
+        </li>
+      </ul>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
