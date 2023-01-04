@@ -75,6 +75,25 @@ ul {
     font-weight: 200;
 }
 
+.github-logo {
+height: 10px;
+}
+.github {
+    text-decoration: none;
+    text-align: center;
+    font-size: 10px;
+}
+
+a {
+    color: #738E94;
+    text-decoration: none;
+    transition: all 150ms ease;
+}
+
+a:hover {
+    color: #000;
+}
+
 .humidity {
     bottom: 55px;
     left: 278px;
@@ -156,7 +175,7 @@ ul {
     position: relative;
     width: 600px;
     height: 350px;
-    margin: 60px auto;
+    margin: 60px auto 0px;
     overflow-x: auto;
     padding: 0px;
 }
