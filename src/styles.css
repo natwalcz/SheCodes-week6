@@ -66,14 +66,14 @@ ul {
     border: 0px;
     padding: 0;
     margin: 0;
-    width: 90%;
-    /*100%*/
+    width: 80%;
     height: 100%;
     color: #000;
     font-family: "Poppins", sans-serif;
     font-size: 40px;
     font-weight: 200;
 }
+
 
 .github-logo {
 height: 10px;
@@ -103,6 +103,25 @@ a:hover {
     font-size: 60px;
 }
 
+.location {
+    background: #000;
+    color: #f9f9f9;
+    display: inline;
+    font-size: 50px;
+    height: 62px;
+    line-height: 60px;
+    position:absolute;
+    right:-1px;
+    text-align: center;
+    top: -1px;
+    transition: all 100ms ease;
+    width: 62px;
+}
+
+.location:hover {
+    color: #000;
+}
+
 .new-city {
     border: 1px solid #000;
     position: absolute;
@@ -121,11 +140,11 @@ a:hover {
 }
 
 .search {
-    border-width: 1px;
+    border-width: 0px;
     background: #000;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -1px;
+    right: 61px;
     height: 62px;
     width: 10%;
     padding: 0;
