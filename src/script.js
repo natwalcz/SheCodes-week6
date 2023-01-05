@@ -1,5 +1,15 @@
  let apiKey = "b9ba0314a93083136d968577c718e31d";
  
+ function UrlExists(url) {
+        let http = new XMLHttpRequest();
+        http.open('HEAD', url, false);
+        http.send();
+        if (http.status != 404)
+            return true;
+        else
+            return false;      
+    }
+
  function showWeather(response) {
   let temperature = Math.round(response.data.main.temp);
   let wind = Math.round(response.data.wind.speed);
@@ -10,8 +20,8 @@
   currentWindValue.innerHTML = `${wind}`;
   currentTempValue.innerHTML = `${temperature}`;
   currentHumidityValue.innerHTML = `${humidity}`;
-}
-
+   }
+ 
 function newCity(event) {
   event.preventDefault();
   let newCity = document.querySelector("#enter-city");
@@ -22,6 +32,10 @@ function newCity(event) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${newCity.value}&appid=${apiKey}&&units=metric`;
 axios.get(url).then(showWeather);
 newCity.value=null;
+if (UrlExists(url)===false){
+  alert("Unfortunately the forecast for this city cannot be shown. Enter another city or use geolcation.");
+  currentCity.innerHTML = `Enter another city`;
+};
  }
 
 let newCityForm = document.querySelector("#enter-city-form");
@@ -103,7 +117,7 @@ function getCoordinates(event) {
 let findLocation = document.querySelector("#find-location");
 findLocation.addEventListener("click", getCoordinates);
 
-
+navigator.geolocation.getCurrentPosition(currentPosition);
 
 
 
