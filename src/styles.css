@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 body {
     background: #f9f9f9;
     font-family: "Poppins", sans-serif;
@@ -21,16 +25,15 @@ ul {
 .climate {
     bottom: 5px;
     left: 20px;
-}
+   }
 
 .current {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
-    background: rgb(190, 194, 213);
     background: linear-gradient(54deg,
-            rgba(190, 194, 213, 1) 0%,
-            rgba(128, 161, 161, 1) 58%,
-            rgba(56, 56, 87, 1) 100%);
+        rgba(190, 194, 213, 1) 0%,
+        rgba(176, 198, 198, 1) 58%,
+        rgba(131, 131, 163, 1) 100%);
     position: relative;
     top: 62px;
     bottom: 62px;
@@ -74,24 +77,14 @@ ul {
     font-weight: 200;
 }
 
-
 .github-logo {
 height: 10px;
 }
+
 .github {
     text-decoration: none;
     text-align: center;
     font-size: 10px;
-}
-
-a {
-    color: #738E94;
-    text-decoration: none;
-    transition: all 150ms ease;
-}
-
-a:hover {
-    color: #000;
 }
 
 .humidity {
@@ -114,12 +107,13 @@ a:hover {
     right:-1px;
     text-align: center;
     top: -1px;
-    transition: all 100ms ease;
+    transition: all 300ms ease;
     width: 62px;
 }
 
 .location:hover {
     color: #000;
+    cursor: pointer;
 }
 
 .new-city {
@@ -148,12 +142,13 @@ a:hover {
     height: 62px;
     width: 10%;
     padding: 0;
-    transition: all 100ms ease;
+    transition: all 300ms ease;
     color: #f9f9f9;
 }
 
 .search:hover {
     color: #000;
+    cursor: pointer;
 }
 
 .temperature {

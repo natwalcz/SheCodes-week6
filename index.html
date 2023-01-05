@@ -41,12 +41,12 @@
           />
         </form>
         <button id="find-location">
-          <span class="material-symbols-outlined location" id="location">
+          <span class="material-symbols-outlined location">
             location_searching
           </span>
         </button>
       </div>
-      <div class="current">
+      <div class="current" id="gradient">
         <span id="current-city"></span>
         <div class="today temperature">
           TEMPERATURE
@@ -67,8 +67,8 @@
           HUMIDITY
           <div class="value-humidity"><span id="humidity"></span>%</div>
         </div>
-        <div class="today climate">
-          <img src="img/cloud.png" alt="cloud" height="58px" />
+        <div class="today climate" id="icon">
+          <img src="img/icon80X.png" height="58px" />
         </div>
         <div class="today time">
           <div id="current-day"></div>
@@ -100,7 +100,10 @@
       </ul>
     </div>
     <div class="github">
-      <a href="https://github.com/natwalcz/SheCodes-week6" target="_blank"
+      <a
+        href="https://github.com/natwalcz/SheCodes-week6"
+        target="_blank"
+        id="github"
         >coded by Natalia Walczak
         <img src="img/github-mark.png" class="github-logo" />
       </a>
