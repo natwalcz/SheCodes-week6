@@ -42,6 +42,8 @@
 
  function showWeather(response) {
         let temperature = Math.round(response.data.main.temp);
+        celciusTemp = temperature;
+        let currentTempUnit=document.querySelector("#current-temp-unit");
         let wind = Math.round(response.data.wind.speed);
         let humidity = Math.round(response.data.main.humidity);
         let name = (response.data.name.toUpperCase());
@@ -51,6 +53,7 @@
         let currentCity = document.querySelector("#current-city");
         currentWindValue.innerHTML = `${wind}`;
         currentTempValue.innerHTML = `${temperature}`;
+        currentTempUnit.innerHTML = `C`;
         currentHumidityValue.innerHTML = `${humidity}`;
         currentCity.innerHTML = `${name}`;
         changeIcon(response);
@@ -115,34 +118,24 @@ currentTime.innerHTML =`${hour}:${minutes}`;
 
 function changeTempUnit(event) {
 event.preventDefault();
-/*let currentTempValue = document.querySelector("#current-temp-value");
+let currentTempValue = document.querySelector("#current-temp-value");
+let temperatureF = (celciusTemp * 9) / 5 + 32;
 let currentTempUnit=document.querySelector("#current-temp-unit");
-let currentTempValueF = currentTempValue*1.8+32;
-console.log(currentTempValue);
-console.log(currentTempValueF);
+
 if (currentTempUnit.innerHTML === "C") {
-currentTempValue.innerHTML = `${currentTempValueF}` 
-currentTempUnit.innerHTML = `F`} 
-else 
-{currentTemp.innerHTML = `<a href="" id="current-temp" class="current-temp">6°<span id="current-temp-unit">C</span></a>`}
-*/
+currentTempValue.innerHTML=Math.round(temperatureF);
+currentTempUnit.innerHTML = `F`; } else {
+currentTempValue.innerHTML=celciusTemp; 
+currentTempUnit.innerHTML = `C`;
 }
+}
+
+let celciusTemp = null;
 
 let currentTemp = document.querySelector("#current-temp");
 currentTemp.addEventListener("click", changeTempUnit);
-
-//let currentTempF = document.querySelector("#current-temp-f")
-//console.log(`${currentTempF}`);
-
-
 
 let findLocation = document.querySelector("#find-location");
 findLocation.addEventListener("click", getCoordinates);
 
 navigator.geolocation.getCurrentPosition(currentPosition);
-
-/*
-To do:
-- units conversion
-- what if name of city is too long
-*/
