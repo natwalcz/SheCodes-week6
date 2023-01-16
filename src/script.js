@@ -1,6 +1,6 @@
- let apiKey = "b9ba0314a93083136d968577c718e31d";
+let apiKey = "b9ba0314a93083136d968577c718e31d";
  
- function UrlExists(url) {
+function UrlExists(url) {
         let http = new XMLHttpRequest();
         http.open('HEAD', url, false);
         http.send();
@@ -10,7 +10,7 @@
             return false;
       }
 
-  function changeIcon(response) {
+function changeIcon(response) {
         let icon = document.querySelector("#icon");
         if (response.data.weather[0].id > 199 && response.data.weather[0].id< 600)
         {icon.innerHTML= `<img src="img/icon200.png" height= "58px">`}
@@ -24,7 +24,7 @@
         {icon.innerHTML= `<img src="img/icon80X.png" height= "58px">`}
       }
 
-    function changeGradient(response) {
+function changeGradient(response) {
         let temperature = Math.round(response.data.main.temp);
         let gradient = document.getElementById("gradient");
         let github = document.getElementById("github");
@@ -38,9 +38,8 @@
         {github.style.color = `rgba(230,200,232,1)`;
         gradient.style.background = `linear-gradient(54deg, rgba(228,195,107,1) 0%, rgba(244,242,191,1) 58%, rgba(230,200,232,1) 100%)`;}
       }
-    
 
- function showWeather(response) {
+function showWeather(response) {
         let temperature = Math.round(response.data.main.temp);
         celciusTemp = temperature;
         let currentTempUnit=document.querySelector("#current-temp-unit");
@@ -50,14 +49,41 @@
         let currentTempValue = document.querySelector("#current-temp-value");
         let currentWindValue = document.querySelector("#wind-speed");
         let currentHumidityValue = document.querySelector("#humidity");
-        let currentCity = document.querySelector("#current-city");
+        let currentCity = document.getElementById("current-city");
+        
         currentWindValue.innerHTML = `${wind}`;
         currentTempValue.innerHTML = `${temperature}`;
         currentTempUnit.innerHTML = `C`;
         currentHumidityValue.innerHTML = `${humidity}`;
         currentCity.innerHTML = `${name}`;
+        
         changeIcon(response);
         changeGradient(response);
+
+        if (name.length>18) {
+        if(name.length<22) {
+        currentCity.style.fontSize = "42px";}else{
+        currentCity.style.fontSize = "30px";
+         }}
+        }
+        
+function showForecast () {
+        let forecastElement = document.querySelector("#forecast");
+        let forecastHTML= `
+        <li class="day one">
+          MONDAY
+          <div class="temperature-forecast">13°C</div>
+        </li>`;
+
+        let days = ["one", "two", "three", "four", "five"];
+        days.forEach(function(day) {
+        forecastHTML = forecastHTML + 
+        `<li class="day two">
+          MONDAY
+          <div class="temperature-forecast">13°C</div>
+        </li>`;
+        forecastElement.innerHTML = forecastHTML;
+        }); 
       }
   
 function newCity(event) {
@@ -84,6 +110,20 @@ function currentPosition(position) {
 
 function getCoordinates(event) {
         navigator.geolocation.getCurrentPosition(currentPosition);
+      }
+
+function changeTempUnit(event) {
+        event.preventDefault();
+        let currentTempValue = document.querySelector("#current-temp-value");
+        let temperatureF = (celciusTemp * 9) / 5 + 32;
+        let currentTempUnit=document.querySelector("#current-temp-unit");
+
+        if (currentTempUnit.innerHTML === "C") {
+        currentTempValue.innerHTML=Math.round(temperatureF);
+        currentTempUnit.innerHTML = `F`; } else {
+        currentTempValue.innerHTML=celciusTemp; 
+        currentTempUnit.innerHTML = `C`;
+        }
       }
 
 let newCityForm = document.querySelector("#enter-city-form");
@@ -116,19 +156,7 @@ let minutes = now.getMinutes();
 currentDay.innerHTML = `${day.toUpperCase()}`;
 currentTime.innerHTML =`${hour}:${minutes}`;
 
-function changeTempUnit(event) {
-event.preventDefault();
-let currentTempValue = document.querySelector("#current-temp-value");
-let temperatureF = (celciusTemp * 9) / 5 + 32;
-let currentTempUnit=document.querySelector("#current-temp-unit");
-
-if (currentTempUnit.innerHTML === "C") {
-currentTempValue.innerHTML=Math.round(temperatureF);
-currentTempUnit.innerHTML = `F`; } else {
-currentTempValue.innerHTML=celciusTemp; 
-currentTempUnit.innerHTML = `C`;
-}
-}
+showForecast();
 
 let celciusTemp = null;
 
@@ -139,3 +167,10 @@ let findLocation = document.querySelector("#find-location");
 findLocation.addEventListener("click", getCoordinates);
 
 navigator.geolocation.getCurrentPosition(currentPosition);
+
+
+/* TO DO:
+- what if city name is too long?
+- update time depending on location
+- clean the code
+- make it reactive? */

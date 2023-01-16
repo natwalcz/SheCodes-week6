@@ -156,11 +156,7 @@ height: 10px;
     left: 80px;
 }
 
-.temperature-one,
-.temperature-two,
-.temperature-three,
-.temperature-four,
-.temperature-five {
+.temperature-forecast {
     font-size: 28px;
     line-height: 36px;
     padding: 2px 0;
