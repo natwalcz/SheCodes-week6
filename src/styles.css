@@ -14,12 +14,13 @@ input:focus-visible {
 ul {
     display: flex;
     position: absolute;
-    width: 100%;
+    width: 599px;
     bottom: 0;
-    left: 0;
+    left: -1 px;
     margin: 0;
     padding: 0;
     word-spacing: 0;
+    border-left: 1px solid #000;
 }
 
 .climate {
@@ -104,11 +105,11 @@ height: 10px;
     height: 62px;
     line-height: 60px;
     position:absolute;
-    right:-1px;
+    right: 0px;
     text-align: center;
     top: -1px;
     transition: all 300ms ease;
-    width: 62px;
+    width: 60px;
 }
 
 .location:hover {
@@ -124,7 +125,7 @@ height: 10px;
     margin: 0;
     width: 598px;
     /*90%*/
-    height: 60px;
+    height: 60.15px;
     font-size: 40px;
     font-weight: 200;
 }
@@ -137,10 +138,10 @@ height: 10px;
     border-width: 0px;
     background: #000;
     position: absolute;
-    bottom: -1px;
-    right: 61px;
+    top: -1px;
+    right: 60px;
     height: 62px;
-    width: 10%;
+    width: 60px;
     padding: 0;
     transition: all 300ms ease;
     color: #f9f9f9;

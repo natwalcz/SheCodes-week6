@@ -1,5 +1,5 @@
-let apiKey = "b9ba0314a93083136d968577c718e31d";
- 
+let apiKey = "fda3688b1db05987dd5d07c237aecfba";
+
 function UrlExists(url) {
         let http = new XMLHttpRequest();
         http.open('HEAD', url, false);
@@ -39,6 +39,71 @@ function changeGradient(response) {
         gradient.style.background = `linear-gradient(54deg, rgba(228,195,107,1) 0%, rgba(244,242,191,1) 58%, rgba(230,200,232,1) 100%)`;}
       }
 
+function forecastDayFormat (timestamp) {
+        let date = new Date(timestamp * 1000);
+        let day = date.getDay();
+        let days = [ "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"];
+        return days[day].toUpperCase();
+      }
+
+function dayFormat (timestamp) {
+        let now = new Date(timestamp);
+        let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+        ];
+        let day = days[now.getDay()];
+        return `${day.toUpperCase()}`;
+      }
+
+function timeFormat () {
+        let now = new Date();
+        let hour = now.getHours();
+        if (hour < 10) {
+        hour = `0${hour}`;
+      }
+        let minutes = now.getMinutes();
+        if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
+        return `${hour}:${minutes}`;
+      }
+
+function showForecast (response) {
+        let forecast = response.data.daily;
+        let forecastElement = document.querySelector("#forecast");
+        let forecastHTML= ``;
+
+        forecast.forEach(function(forecastDay, index) {
+        if (index>0 && index<6) {
+        forecastHTML = forecastHTML + 
+        `<li class="day">
+        ${forecastDayFormat(forecastDay.dt)}
+        <div class="temperature-forecast">${Math.round(forecastDay.temp.day)}°C</div>
+        </li>`;
+        }
+        }); 
+        forecastElement.innerHTML = forecastHTML;
+      }
+      
+function getForecast(coordinates) {
+        console.log(coordinates);
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+        axios.get(url).then(showForecast);
+      }      
+
 function showWeather(response) {
         let temperature = Math.round(response.data.main.temp);
         celciusTemp = temperature;
@@ -51,11 +116,17 @@ function showWeather(response) {
         let currentHumidityValue = document.querySelector("#humidity");
         let currentCity = document.getElementById("current-city");
         
+        let currentDay = document.querySelector("#current-day");
+        let currentTime = document.querySelector("#current-time");
+        
         currentWindValue.innerHTML = `${wind}`;
         currentTempValue.innerHTML = `${temperature}`;
         currentTempUnit.innerHTML = `C`;
         currentHumidityValue.innerHTML = `${humidity}`;
         currentCity.innerHTML = `${name}`;
+        
+        currentDay.innerHTML = dayFormat(response.data.dt * 1000);
+        currentTime.innerHTML = timeFormat();
         
         changeIcon(response);
         changeGradient(response);
@@ -64,37 +135,22 @@ function showWeather(response) {
         if(name.length<22) {
         currentCity.style.fontSize = "42px";}else{
         currentCity.style.fontSize = "30px";
-         }}
-        }
-        
-function showForecast () {
-        let forecastElement = document.querySelector("#forecast");
-        let forecastHTML= `
-        <li class="day one">
-          MONDAY
-          <div class="temperature-forecast">13°C</div>
-        </li>`;
+        }} else {
+        currentCity.style.fontSize = "50px"
+        };
 
-        let days = ["one", "two", "three", "four", "five"];
-        days.forEach(function(day) {
-        forecastHTML = forecastHTML + 
-        `<li class="day two">
-          MONDAY
-          <div class="temperature-forecast">13°C</div>
-        </li>`;
-        forecastElement.innerHTML = forecastHTML;
-        }); 
-      }
-  
+        getForecast(response.data.coord);
+       }
+
 function newCity(event) {
         event.preventDefault();
         let newCity = document.querySelector("#enter-city");
-          let currentCity = document.querySelector("#current-city");
+        let currentCity = document.querySelector("#current-city");
         if (newCity.value) {
-          currentCity.innerHTML = `${newCity.value.toUpperCase()}`;
+        currentCity.innerHTML = `${newCity.value.toUpperCase()}`;
         } 
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${newCity.value}&appid=${apiKey}&&units=metric`;
-       axios.get(url).then(showWeather);
+        axios.get(url).then(showWeather);
         newCity.value=null;
         if (UrlExists(url)===false){
         alert("Unfortunately the forecast for this city cannot be shown. Enter another city or use geolocation.");
@@ -129,7 +185,7 @@ function changeTempUnit(event) {
 let newCityForm = document.querySelector("#enter-city-form");
 newCityForm.addEventListener("submit", newCity);
 
-let now = new Date();
+/*let now = new Date();
 let days = [
   "Sunday",
   "Monday",
@@ -155,8 +211,8 @@ let minutes = now.getMinutes();
 
 currentDay.innerHTML = `${day.toUpperCase()}`;
 currentTime.innerHTML =`${hour}:${minutes}`;
+*/
 
-showForecast();
 
 let celciusTemp = null;
 
@@ -170,7 +226,6 @@ navigator.geolocation.getCurrentPosition(currentPosition);
 
 
 /* TO DO:
-- what if city name is too long?
 - update time depending on location
 - clean the code
 - make it reactive? */
