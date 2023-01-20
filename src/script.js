@@ -99,7 +99,6 @@ function showForecast (response) {
       }
       
 function getForecast(coordinates) {
-        console.log(coordinates);
         let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
         axios.get(url).then(showForecast);
       }      
@@ -185,35 +184,6 @@ function changeTempUnit(event) {
 let newCityForm = document.querySelector("#enter-city-form");
 newCityForm.addEventListener("submit", newCity);
 
-/*let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday"
-];
-let day = days[now.getDay()];
-let currentDay = document.querySelector("#current-day");
-let currentTime = document.querySelector("#current-time");
-let hour = now.getHours();
- if (hour < 10) {
-    hour = `0${hour}`;
-  }
-let minutes = now.getMinutes();
-
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-currentDay.innerHTML = `${day.toUpperCase()}`;
-currentTime.innerHTML =`${hour}:${minutes}`;
-*/
-
-
 let celciusTemp = null;
 
 let currentTemp = document.querySelector("#current-temp");
@@ -223,9 +193,3 @@ let findLocation = document.querySelector("#find-location");
 findLocation.addEventListener("click", getCoordinates);
 
 navigator.geolocation.getCurrentPosition(currentPosition);
-
-
-/* TO DO:
-- update time depending on location
-- clean the code
-- make it reactive? */
